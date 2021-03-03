@@ -1,11 +1,12 @@
 # RubyBomber
 Простой смс бомбер на ruby.
 
-# Установка
+## Установка
 
 ### Termux
 
-```pkg install ruby git
+```
+pkg install ruby git
 git https://github.com/AlianaBasil/RubyBomber
 cd RubyBomber
 ruby bomber.rb
@@ -13,14 +14,19 @@ ruby bomber.rb
 
 ### Ubuntu/Debian
 
-``` sudo apt update && sudo apt upgrade
+``` 
+sudo apt update && sudo apt upgrade
 sudo apt install ruby git
 git https://github.com/AlianaBasil/RubyBomber
 cd RubyBomber
 ruby bomber.rb
 ```
 
-# Добавление своего сервиса
+### Прочие системы
+
+Установите интерплитатор ruby и запустить ``bomber.rb``
+
+## Добавление своего сервиса
 
 Создайте .json файл в папке services и добавьте в него следующее:
 
