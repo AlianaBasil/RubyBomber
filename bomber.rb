@@ -91,7 +91,7 @@ def bomber(hsh, response)
   end
   result = https.request request
   if response
-    if config('debug')
+    if config('full_responses')
       put_debug "#{hsh['name']} response: #{result.body}"
     elsif result.body.size > 250
       put_anything "#{hsh['name']} response code: #{result.code}"
