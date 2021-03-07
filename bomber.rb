@@ -30,6 +30,7 @@ def main
     services[i] = File.read services[i]
     services[i] = JSON.parse services[i]
     services[i] = substitute(services[i], '$phone', phone)
+    services[i] = substitute(services[i], '$phone_np', phone_np)
     put_debug "Service json: #{services[i]}"
     puts services[i]
   end
