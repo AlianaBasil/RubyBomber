@@ -1,4 +1,5 @@
 {
-  "response": false,
-  "debug": false
+  "response": true,
+  "debug": true,
+  "full_responses": true
 }
