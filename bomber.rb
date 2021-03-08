@@ -85,7 +85,6 @@ def bomber(hsh, response)
   https = Net::HTTP.new(uri.host, uri.port)
   https.use_ssl = true
   request = Net::HTTP::Post.new(uri.path)
-  request['X-Requested-With'] = 'XMLHttpRequest'
   if hsh['params'].include? '$json'
     request['Content-Type'] = 'application/json'
     request.body = hsh['body'].to_json
