@@ -13,7 +13,7 @@ def main
   put_warning 'Бомбер тестировался только с российскими номерами, нет возможности проверить с украинскими'
   put_warning 'При возникновении любых ошибок пишите t.me/ursna1'
 
-  phone = input('Введите номер(Пример: +796...): ').strip
+  phone = input('Введите номер(Пример: +79...): ').strip
   # phone without plus
   phone_np = phone.sub('+', '')
 
@@ -85,6 +85,7 @@ def bomber(hsh, response)
   https = Net::HTTP.new(uri.host, uri.port)
   https.use_ssl = true
   request = Net::HTTP::Post.new(uri.path)
+  request['X-Requested-With'] = 'XMLHttpRequest'
   if hsh['params'].include? '$json'
     request['Content-Type'] = 'application/json'
     request.body = hsh['body'].to_json
