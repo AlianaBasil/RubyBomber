@@ -1,5 +1,5 @@
 {
-  "response": true,
-  "debug": true,
-  "full_responses": true
+  "response": false,
+  "debug": false,
+  "full_responses": false
 }
